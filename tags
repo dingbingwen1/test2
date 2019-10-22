@@ -5,8 +5,14 @@
 !_TAG_PROGRAM_URL	http://ctags.sourceforge.net	/official site/
 !_TAG_PROGRAM_VERSION	5.9~svn20110310	//
 UNUMBER	week6/code/staticlib/base.c	6;"	d	language:C	file:
+init	week6/code/dynamiclib/base.c	/^void init(int *a,int n)$/;"	f	language:C	signature:(int *a,int n)
 init	week6/code/staticlib/base.c	/^void init(int *a)$/;"	f	language:C	signature:(int *a)
+main	week6/code/dynamiclib/localdytest.c	/^int main()$/;"	f	language:C
+main	week6/code/exam/remotetest.c	/^int main()$/;"	f	language:C
 main	week6/code/staticlib/test.c	/^int main()$/;"	f	language:C
+max	week6/code/dynamiclib/aoprend.c	/^int max(int *a,int n)$/;"	f	language:C	signature:(int *a,int n)
 max	week6/code/staticlib/aoprand.c	/^int max(int *a,int n)$/;"	f	language:C	signature:(int *a,int n)
+show	week6/code/dynamiclib/base.c	/^void show(int *a,int n)$/;"	f	language:C	signature:(int *a,int n)
 show	week6/code/staticlib/base.c	/^void show(int *a,int n)$/;"	f	language:C	signature:(int *a,int n)
+sum	week6/code/dynamiclib/aoprend.c	/^int sum(int* a,int n)$/;"	f	language:C	signature:(int* a,int n)
 sum	week6/code/staticlib/aoprand.c	/^int sum(int* a,int n)$/;"	f	language:C	signature:(int* a,int n)
