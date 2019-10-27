@@ -1,0 +1,2 @@
+int change();
+void show();
