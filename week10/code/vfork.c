@@ -1,30 +1,42 @@
+#include<stdio.h>
 #include <sys/types.h>
-#include <stdio.h>
-#include <stdlib.h>
 #include <unistd.h>
-
-int gvar = 4;
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <fcntl.h>
+#include <stdlib.h>
+#include <string.h>
 int main(void)
 {
-	pid_t pid;
-	int var = 10;
-	printf("process id:%ld\n",(long)getpid());
-	printf("gvar = %d var = %d\n",gvar,var);
-
-	if((pid = vfork())<0)
+	pid_t pid  = -1;
+	FILE *fp=NULL;
+	
+	fp = fopen("1.txt", "w+");
+	pid = vfork();
+	if(pid < 0)
 	{
-		printf("error!\n");
-		return 0;
+		perror("vfork");
+		return -1;
 	}
 	else if(pid == 0)
 	{
-		gvar--;
-		var++;
-		printf("the child process id:%ld\n gvar = %d var = %d\n",(long)getpid(),gvar,var);
+		const char*msg="world";
+		printf("这里是子进程.\n");
+		fwrite(msg,strlen(msg) , 1,fp);		
+		_exit(0);
+		//printf("pid = %d.\n", pid);	
+		//printf("子进程中的父进程id = %d.\n", getppid());	
+		//sleep(1);
 	}
 	else
 	{
-		printf("the parent process id:%ld\n gvar = %d var = %d\n",(long)getpid(),gvar,var);
-		return 0;
+		const char*lr="hello";
+		printf("这里是父进程.\n");	
+		fwrite(lr,strlen(lr),1, fp);		
+		//printf("pid = %d.\n", pid);	
+		//sleep(1);
 	}
+	//printf("这一句是否打印两次pid = %d.\n",getpid());
+	
+	return 0;
 }
