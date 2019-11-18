@@ -3,11 +3,11 @@
 #include <stdlib.h>
 #include <unistd.h>
 
-int gvar = 2;
+int gvar = 4;
 int main(void)
 {
 	pid_t pid;
-	int var = 5;
+	int var = 10;
 	printf("process id:%ld\n",(long)getpid());
 	printf("gvar = %d var = %d\n",gvar,var);
 
