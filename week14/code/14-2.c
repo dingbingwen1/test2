@@ -16,7 +16,7 @@ if(rv!=0)
 {
 printf("thread create failed!\n");
 return -1;
-}
+} 
 printf("Create thread %lx\n",tid);
 }
 printf("goodbye");
