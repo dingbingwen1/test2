@@ -1,0 +1,55 @@
+#include <sys/wait.h>
+#include <stdio.h>
+#include <time.h>
+#include <unistd.h>
+#include <signal.h>
+#include <sys/param.h>
+#include <sys/types.h>
+#include <sys/stat.h>
+#include <sys/socket.h>
+#include <netdb.h>
+#include <netinet/in.h>
+#include <stdlib.h>
+#include <string.h>
+#include <errno.h>
+#include <fcntl.h>
+#include <pthread.h>
+#include <assert.h>
+#include <limits.h>
+#include <arpa/inet.h>
+#define SERVPORT 3333
+#define MAXDATASIZE 100 /*每次最大数据传输量 */
+
+int main(int argc, char *argv[]){
+	int sockfd, recvbytes;
+	char buf[MAXDATASIZE];
+	struct hostent *host;
+	struct sockaddr_in serv_addr;
+	if (argc < 2) {
+		fprintf(stderr,"Please enter the server's hostname!\n");
+		exit(1);
+	}
+	if((host=gethostbyname(argv[1]))==NULL) {
+		herror("gethostbyname error！");
+		exit(1);
+	}
+	if ((sockfd = socket(AF_INET, SOCK_STREAM, 0)) == -1){
+		perror("socket create error！");
+		exit(1);
+	}
+	serv_addr.sin_family=AF_INET;
+	serv_addr.sin_port=htons(SERVPORT);
+	serv_addr.sin_addr = *((struct in_addr *)host->h_addr);
+	bzero(&(serv_addr.sin_zero),8);
+	if (connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(struct sockaddr)) == -1) {
+		perror("connect error！");
+		exit(1);
+	}
+	if ((recvbytes=recv(sockfd, buf, MAXDATASIZE, 0)) ==-1) {
+		perror("connect 出错！");
+		exit(1);
+	}
+	buf[recvbytes] = '\0';
+	printf("收到: %s",buf);
+	close(sockfd);
+}
